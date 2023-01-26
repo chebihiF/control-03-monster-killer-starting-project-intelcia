@@ -6,6 +6,7 @@ const HEAL_VALUE = 20;
 let chosenMaxLife = 100;
 let currentMonsterHealth = chosenMaxLife;
 let currentPlayerHealth = chosenMaxLife;
+let bonnus = true;
 
 adjustHealthBars(chosenMaxLife);
 
@@ -21,6 +22,14 @@ function attackMonster(mode) {
   currentMonsterHealth -= damage;
   const playerDamage = dealPlayerDamage(maxDamage);
   currentPlayerHealth -= playerDamage;
+
+  if (currentPlayerHealth <= 0 && bonnus) {
+    increasePlayerHealth(HEAL_VALUE);
+    currentPlayerHealth += HEAL_VALUE;
+    alert("You would be dead but the bonnus save your live");
+    bonnus = false;
+  }
+
   if (currentMonsterHealth <= 0 && currentPlayerHealth > 0) alert("You win");
   else if (currentPlayerHealth <= 0 && currentMonsterHealth > 0)
     alert("You Lost !!!");
